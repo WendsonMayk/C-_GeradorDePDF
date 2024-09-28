@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Maykinho\\Desktop\\UPLOAD\\appMail\\appMail\\appMail.csproj": {}
+    "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Maykinho\\Desktop\\UPLOAD\\appMail\\appMail\\appMail.csproj": {
+    "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maykinho\\Desktop\\UPLOAD\\appMail\\appMail\\appMail.csproj",
+        "projectUniqueName": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
         "projectName": "appMail",
-        "projectPath": "C:\\Users\\Maykinho\\Desktop\\UPLOAD\\appMail\\appMail\\appMail.csproj",
+        "projectPath": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
         "packagesPath": "C:\\Users\\Maykinho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maykinho\\Desktop\\UPLOAD\\appMail\\appMail\\obj\\",
+        "outputPath": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Maykinho\\AppData\\Roaming\\NuGet\\NuGet.Config",

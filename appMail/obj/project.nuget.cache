@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Eh+lPBGixdhFxbXjiMA1Y6n6UuWbO2zoz/W8ABz76HWlQEujiCHdw9PaZFeWUIg8fxwP5O9QxjsVLPRVO+QzVA==",
+  "dgSpecHash": "Z9UgqwgvStVdytcJj4PPF1+80aMLAzbvyWFyW7hHtKbbPVsUTkwGpNHh6+y3M4dnN/1OOZdMiM5Ssay4p8Ra3Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Maykinho\\Desktop\\UPLOAD\\appMail\\appMail\\appMail.csproj",
+  "projectFilePath": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Maykinho\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\Maykinho\\.nuget\\packages\\itext\\8.0.5\\itext.8.0.5.nupkg.sha512",

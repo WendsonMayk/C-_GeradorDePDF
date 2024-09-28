@@ -26,8 +26,36 @@ namespace appMail
         //Aqui insira o caminho do arquivo json
         private string path()
         {
-            string filePath = @"C:\Users\Maykinho\Desktop\UPLOAD\appMail\appMail\core\database\database.json";
-            return filePath;
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.Parent.FullName;
+            string relativePath = Path.Combine(projectDirectory, @"core\database\database.json");
+            FileInfo filepath = new FileInfo(relativePath);
+
+            return filepath.ToString();
+        }
+
+        private string imagePath()
+        {
+            // Obtém o diretório bin\Debug ou bin\Release
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            // Sobe para a pasta do projeto a partir do bin\Debug ou bin\Release
+            string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.Parent.FullName;
+            // Constrói o caminho para o arquivo
+            string relativePath = Path.Combine(projectDirectory, @"core\imagens\logo.png");
+            // Cria o FileInfo com o caminho final
+            FileInfo filepath = new FileInfo(relativePath);
+
+            return filepath.ToString();
+        }
+
+        private string pdfPath()
+        {
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.Parent.FullName;
+            string relativePath = Path.Combine(projectDirectory, @"core\archieve-pdf\relatorio.pdf");
+            FileInfo filepath = new FileInfo(relativePath);
+
+            return filepath.ToString();
         }
 
 
@@ -98,10 +126,8 @@ namespace appMail
                 // Desserializar o JSON para uma lista de objetos Pessoa
                 List<Pessoas> pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(json);
 
-                // Definir o caminho de saída do PDF
-                string pdfPath = @"C:\Users\Maykinho\Desktop\UPLOAD\appMail\appMail\core\archieve-pdf\relatorio.pdf";
 
-                using (PdfWriter writer = new PdfWriter(pdfPath))
+                using (PdfWriter writer = new PdfWriter(pdfPath()))
                 {
                     using (PdfDocument pdfDoc = new PdfDocument(writer))
                     {
@@ -113,9 +139,8 @@ namespace appMail
                             .SetFontSize(20);
                         documento.Add(title);
 
-                        // Adicionar uma imagem no cabeçalho
-                        string imagePath = @"C:\Users\Maykinho\Desktop\UPLOAD\appMail\appMail\core\imagens\logo.png"; // Altere para o caminho da sua imagem
-                        iText.Layout.Element.Image headerImage = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(imagePath))
+
+                        iText.Layout.Element.Image headerImage = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(imagePath()))
                             .SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER)
                             .SetWidth(200); // Altere para o valor desejado, ou utilize GetWidth() para ajustá-lo
 
@@ -195,5 +220,7 @@ namespace appMail
                 MessageBox.Show("Erro ao salvar os dados: " + ex.Message);
             }
         }
+
+   
     }
 }
