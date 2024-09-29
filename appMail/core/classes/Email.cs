@@ -82,5 +82,8 @@ namespace appMail.core.classes
             smtp.Send(message);
             smtp.Dispose();
         }
+
+
+       
     }
 }

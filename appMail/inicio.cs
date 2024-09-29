@@ -7,6 +7,7 @@ using iText.Layout.Properties;
 using iText.Kernel.Colors;
 using appMail.forms;
 using DotNetEnv;
+using System.Threading.Tasks.Dataflow;
 
 namespace appMail
 {
@@ -48,7 +49,7 @@ namespace appMail
             btnExclude.ForeColor = System.Drawing.Color.White;
         }
 
-        //Aqui insira o caminho do arquivo json
+
         private string path()
         {
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -87,12 +88,80 @@ namespace appMail
         {
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.Parent.FullName;
-            string relativePath = Path.Combine(projectDirectory, @"core\.env");
-            
+            string relativePath = Path.Combine(projectDirectory, @"core\.envUser");
+
             // Carrega o arquivo .env usando o caminho especificado
             Env.Load(relativePath);
         }
 
+        //corpo html do email;
+        private string htmlBody()
+        {
+            string body = @"
+    <!DOCTYPE html>
+    <html lang='pt-BR'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            .header {
+                background: black; /* Cabeçalho preto */
+                color: #007bff; /* Cor do nome */
+                padding: 10px 20px;
+                text-align: left;
+                display: flex;
+                align-items: center;
+            }
+            .header h1 {
+                margin: 0;
+                padding-right: 10px; /* Espaçamento entre o texto e o ícone */
+            }
+            .content {
+                padding: 20px;
+                color: #333;
+            }
+            .footer {
+                background: #f1f1f1;
+                text-align: center;
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+            .footer a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            .icon {
+                font-size: 30px; /* Tamanho do ícone da tag */
+                color: purple; /* Cor do ícone da tag */
+                margin-left: 5px; /* Espaçamento do ícone em relação ao nome */
+            }
+        </style>
+    </head>
+    <body>
+        <div class='header'>
+            <span class='icon'>&#60;&#47;&#62;</span> 
+            <h1>Wendson Magalhães</h1>
+        </div>
+        <div class='content'>
+            <p>Olá candidato! Ansioso para o resultado da seleção?,</p>
+            <p>Informamos que o processo seletivo chegou ao fim. Em anexo, você encontrará o edital com os candidatos aprovados.</p>
+            <p>Se você tiver alguma dúvida, entre em contato com o suporte.</p>
+        </div>
+        <div class='footer'>
+            <p>Este é um e-mail gerado automaticamente. Não é necessário responder.</p>
+            <p>&copy; 2024 Wendson Magalhães </>. Todos os direitos reservados.</p>
+        </div>
+    </body>
+    </html>";
+
+            return body;
+        }
 
         private void CarregarColunasDataGridView()
         {
@@ -206,7 +275,7 @@ namespace appMail
                     }
                 }
                 // Exibir mensagem de sucesso
-                MessageBox.Show("PDF gerado com sucesso FINALMENTE!! VIADINHO");
+                MessageBox.Show("PDF GERADO COM SUCESSO!");
             }
 
             catch (Exception error)
@@ -214,7 +283,7 @@ namespace appMail
                 MessageBox.Show(error.Message);
             }
         }
-        
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -344,7 +413,7 @@ namespace appMail
         private async void button1_Click(object sender, EventArgs e)
         {
             startEnvoriment();
-            
+
             var email = Environment.GetEnvironmentVariable("EMAIL_USER");
             var password = Environment.GetEnvironmentVariable("PASSWORD_USER");
             var smtp = Environment.GetEnvironmentVariable("SMTP_USER");
@@ -360,9 +429,9 @@ namespace appMail
                 await Task.Run(() =>
                 {
                     // Código de envio de e-mail
-                    mail.sendEmail(new List<string> { "jacileny.lima.1@gmail.com" },
+                    mail.sendEmail(new List<string> { "jacileny.lima1@gmail.com" }, //Adicione o email ou os e-mails para quem vc quer enviar
                         subject: "PROCESSO SELETIVO",
-                        body: "Segue em anexo o edital dos candidatos aprovados no processo seletivo",
+                        body: htmlBody(),
                         attachments: new List<string> { pdfPath() });
                 });
 
@@ -381,11 +450,5 @@ namespace appMail
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-       
-  
-        }
     }
 }

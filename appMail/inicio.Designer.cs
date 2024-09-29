@@ -36,7 +36,6 @@
             btnAdd = new Button();
             btnEmail = new Button();
             progressBar = new ProgressBar();
-            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -116,23 +115,12 @@
             progressBar.Size = new Size(176, 23);
             progressBar.TabIndex = 8;
             // 
-            // button1
-            // 
-            button1.Location = new Point(328, 82);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 9;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
-            // 
             // inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(810, 459);
-            Controls.Add(button1);
             Controls.Add(progressBar);
             Controls.Add(btnEmail);
             Controls.Add(btnAdd);
@@ -160,6 +148,5 @@
         private Button btnAdd;
         private Button btnEmail;
         private ProgressBar progressBar;
-        private Button button1;
     }
 }

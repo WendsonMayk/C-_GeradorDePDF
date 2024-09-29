@@ -1,0 +1,8 @@
+#SMTP CONFIG 
+#Adicione o SMPT
+#Adicione o email de qual a mensagem será enviada
+#Adicione a senha do SMTP do seu e-mail... Por favor, não confunda com a senha do seu prórprio e-mail \o
+
+SMTP_USER = ""
+EMAIL_USER = ""
+PASSWORD_USER = ""
