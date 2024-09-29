@@ -1,5 +1,6 @@
 ﻿using appMail.core.classes;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1.Cms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,117 +19,102 @@ namespace appMail.forms
         {
             InitializeComponent();
 
-            // Título do Formulário
-            this.Text = "Formulário de Cadastro";
-            this.Size = new System.Drawing.Size(400, 400);
-            this.StartPosition = FormStartPosition.CenterScreen;
+            //Configurations buttons names
+            lblName.Text = "Nome";
+            lblEndereco.Text = "Endereço";
+            lblAge.Text = "Idade";
+            lblAproved.Text = "Aprovado";
+            chkAproved.Text = "sim";
+            lblcomercial.Text = "By: Wendson Magalhães";
+            btnSave.Text = "Salvar";
+            btnCancel.Text = "Cancelar";
+            lblCargo.Text = "Cargo";
 
-            // Label para Nome
-            Label lblNome = new Label { Text = "Nome:", Location = new System.Drawing.Point(20, 20) };
-            TextBox txtNome = new TextBox { Location = new System.Drawing.Point(100, 20), Width = 250 };
+            //Configurations about the form
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            // Label para Idade
-            Label lblIdade = new Label { Text = "Idade:", Location = new System.Drawing.Point(20, 60) };
-            NumericUpDown nudIdade = new NumericUpDown { Location = new System.Drawing.Point(100, 60), Width = 50, Minimum = 0, Maximum = 120 };
 
-            // Label para Endereço
-            Label lblEndereco = new Label { Text = "Endereço:", Location = new System.Drawing.Point(20, 100) };
-            TextBox txtEndereco = new TextBox { Location = new System.Drawing.Point(100, 100), Width = 250 };
+            //Configuration tabindex 
+            txtNome.TabIndex = 0;
+            txtIdade.TabIndex = 1;
+            txtEndereco.TabIndex = 2;
+            txtCargo.TabIndex = 3;
+            chkAproved.TabIndex = 4;
 
-            // Label para Cargo
-            Label lblCargo = new Label { Text = "Cargo:", Location = new System.Drawing.Point(20, 140) };
-            ComboBox cmbCargo = new ComboBox { Location = new System.Drawing.Point(100, 140), Width = 250 };
-            cmbCargo.Items.AddRange(new string[] { "Assistente Administrativo", "Gerente", "Analista", "Desenvolvedor" });
 
-            // Label para Aprovado
-            Label lblAprovado = new Label { Text = "Aprovado:", Location = new System.Drawing.Point(20, 180) };
-            CheckBox chkAprovado = new CheckBox { Location = new System.Drawing.Point(100, 180) };
 
-            // Botão Salvar
-            Button btnSalvar = new Button { Text = "Salvar", Location = new System.Drawing.Point(100, 220) };
-            btnSalvar.Click += (s, e) =>
+        }
+
+        inicio inicio = new inicio();
+        public event Action OnPessoaAdded;
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
             {
-                // Validação dos dados
-                if (string.IsNullOrWhiteSpace(txtNome.Text))
-                {
-                    MessageBox.Show("Por favor, insira um nome válido.");
-                    return;
-                }
-
-                if (nudIdade.Value < 0 || nudIdade.Value > 120)
-                {
-                    MessageBox.Show("Por favor, insira uma idade válida entre 0 e 120.");
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtEndereco.Text))
-                {
-                    MessageBox.Show("Por favor, insira um endereço válido.");
-                    return;
-                }
-
-                if (cmbCargo.SelectedItem == null)
-                {
-                    MessageBox.Show("Por favor, selecione um cargo.");
-                    return;
-                }
-
-                // Criação do objeto para armazenar os dados
-                var pessoa = new Pessoas
-                {
-                    nome = txtNome.Text,
-                    idade = (int)nudIdade.Value,
-                    endereco = txtEndereco.Text,
-                    cargo = cmbCargo.SelectedItem.ToString(),
-                    aprovado = chkAprovado.Checked
-                };
-
-                // Salvar em JSON
                 List<Pessoas> pessoas;
-                string jsonPath = "pessoas.json";
 
-                if (File.Exists(jsonPath))
+                if (File.Exists(inicio.getPath()))
                 {
-                    string json = File.ReadAllText(jsonPath);
-                    pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(json) ?? new List<Pessoas>();
+                    string jsonAntigo = File.ReadAllText(inicio.getPath());
+                    pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(jsonAntigo) ?? new List<Pessoas>();
                 }
                 else
                 {
                     pessoas = new List<Pessoas>();
                 }
 
-                pessoas.Add(pessoa);
+                var novaPessoa = new Pessoas
+                {
+                    nome = txtNome.Text,
+                    idade = Convert.ToInt32(txtIdade.Value),
+                    endereco = txtEndereco.Text,
+                    cargo = txtCargo.Text,
+                    aprovado = chkAproved.Checked ? true : false,
+
+                };
+
+
+                pessoas.Add(novaPessoa);
+
                 string jsonAtualizado = JsonConvert.SerializeObject(pessoas, Formatting.Indented);
-                File.WriteAllText(jsonPath, jsonAtualizado);
 
-                // Exibir mensagem de sucesso
-                MessageBox.Show("Dados salvos com sucesso!");
-                ClearFields(txtNome, nudIdade, txtEndereco, cmbCargo, chkAprovado);
-            };
+                File.WriteAllText(inicio.getPath(), jsonAtualizado);
 
-            // Adiciona todos os controles ao Formulário
-            this.Controls.Add(lblNome);
-            this.Controls.Add(txtNome);
-            this.Controls.Add(lblIdade);
-            this.Controls.Add(nudIdade);
-            this.Controls.Add(lblEndereco);
-            this.Controls.Add(txtEndereco);
-            this.Controls.Add(lblCargo);
-            this.Controls.Add(cmbCargo);
-            this.Controls.Add(lblAprovado);
-            this.Controls.Add(chkAprovado);
-            this.Controls.Add(btnSalvar);
+                MessageBox.Show("Candidato inserido com sucesso");
+                cleanData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao salvar os dados: " + ex.Message);
+            }
         }
 
-
-        private void ClearFields(TextBox txtNome, NumericUpDown nudIdade, TextBox txtEndereco, ComboBox cmbCargo, CheckBox chkAprovado)
+        private void cleanData()
         {
-            // Limpa os campos após salvar
-            txtNome.Clear();
-            nudIdade.Value = 0;
-            txtEndereco.Clear();
-            cmbCargo.SelectedIndex = -1;
-            chkAprovado.Checked = false;
+            txtNome.Text = string.Empty;
+            txtIdade.Value = 18;
+            txtCargo.Text = string.Empty;
+            txtEndereco.Text = string.Empty;
+            chkAproved.Checked = false;
+        }
+
+        private void addPessoas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            OnPessoaAdded?.Invoke();
+        }
+
+        private void lblcomercial_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
+
+

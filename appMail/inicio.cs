@@ -6,6 +6,7 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.Kernel.Colors;
 using appMail.forms;
+using iText.Commons.Utils;
 
 namespace appMail
 {
@@ -18,12 +19,32 @@ namespace appMail
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
 
-            //Configuration
-            label1.Text = "Email Sender v1.0";
+            //Configuration 
+            label1.Text = "generator pdf v1.0";
 
-            //Buttons
+
+            //Buttons texts
             btn.Text = "Gerar PDF";
             btnSave.Text = "Salvar";
+            btnExclude.Text = "Excluir";
+            btnAdd.Text = "adicionar";
+
+
+            //Configuration buttons Colors
+            btn.BackColor = System.Drawing.Color.Orange;
+            btnSave.BackColor = System.Drawing.Color.Green;
+            btnExclude.BackColor = System.Drawing.Color.Red;
+
+
+            //Configuration buttons Cursors
+            btn.Cursor = Cursors.Hand;
+            btnSave.Cursor = Cursors.Hand;
+            btnExclude.Cursor = Cursors.Hand;
+
+
+            //Configuration buttons ForeColor
+            btnSave.ForeColor = System.Drawing.Color.White;
+            btnExclude.ForeColor = System.Drawing.Color.White;
         }
 
         //Aqui insira o caminho do arquivo json
@@ -64,6 +85,8 @@ namespace appMail
 
         private void CarregarColunasDataGridView()
         {
+            //Desabilita a opção de inserir dados no datagridview
+            dataGridView1.AllowUserToAddRows = false;
 
             dataGridView1.Columns.Add("Nome", "Nome");
             dataGridView1.Columns.Add("Idade", "Idade");
@@ -92,7 +115,6 @@ namespace appMail
         {
             try
             {
-
                 // Ler o conteúdo do arquivo
                 string json = File.ReadAllText(path());
 
@@ -111,8 +133,6 @@ namespace appMail
             {
                 MessageBox.Show("Erro ao carregar os dados: " + ex.Message);
             }
-
-
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -216,7 +236,7 @@ namespace appMail
                 File.WriteAllText(path(), json);
 
                 // Exibir mensagem de sucesso
-                MessageBox.Show("Dados salvos com sucesso em: " + path());
+                MessageBox.Show("Dados salvos com sucesso");
             }
             catch (Exception ex)
             {
@@ -226,47 +246,88 @@ namespace appMail
 
         private void btnExclude_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult resultado = MessageBox.Show("Deseja continuar?", "Confirmação", MessageBoxButtons.YesNo);
+            if (resultado != DialogResult.Yes)
             {
-                // Verificar se alguma linha está selecionada no DataGridView
-                if (dataGridView1.SelectedRows.Count > 0)
-                {
-                    // Obter a linha selecionada
-                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-                    string nomeParaExcluir = selectedRow.Cells["Nome"].Value.ToString();
+                MessageBox.Show("Ação cancelada");
+            }
+            else
+            {
 
-                    if (File.Exists(path()))
+                try
+                {
+                    // Verificar se alguma linha está selecionada no DataGridView
+                    if (dataGridView1.SelectedRows.Count > 0)
                     {
-                        string json = File.ReadAllText(path());
-                        List<Pessoas> pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(json);
-                        pessoas = pessoas.Where(p => p.nome != nomeParaExcluir).ToList();
-                        string jsonAtualizado = JsonConvert.SerializeObject(pessoas, Formatting.Indented);
-                        File.WriteAllText(path(), jsonAtualizado);
-                        dataGridView1.Rows.Remove(selectedRow);
-                        MessageBox.Show("Pessoa removida com sucesso.");
+                        // Obter a linha selecionada
+                        DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                        string nomeParaExcluir = selectedRow.Cells["Nome"].Value.ToString();
+
+                        if (File.Exists(path()))
+                        {
+                            string json = File.ReadAllText(path());
+                            List<Pessoas> pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(json);
+                            pessoas = pessoas.Where(p => p.nome != nomeParaExcluir).ToList();
+                            string jsonAtualizado = JsonConvert.SerializeObject(pessoas, Formatting.Indented);
+                            File.WriteAllText(path(), jsonAtualizado);
+                            dataGridView1.Rows.Remove(selectedRow);
+                            MessageBox.Show("Pessoa removida com sucesso.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Arquivo JSON não encontrado.");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Arquivo JSON não encontrado.");
+                        MessageBox.Show("Por favor, selecione uma linha para excluir.");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Por favor, selecione uma linha para excluir.");
+                    MessageBox.Show("Erro ao excluir a pessoa: " + ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao excluir a pessoa: " + ex.Message);
-            }
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             addPessoas addPessoas = new addPessoas();
 
+            addPessoas.OnPessoaAdded += LoadData;   // Assine o evento para carregar os dados quando uma nova pessoa for adicionada
+
             addPessoas.ShowDialog();
+        }
+
+
+        public string getPath()
+        {
+            return this.path();
+        }
+
+
+        public void LoadData()
+        {
+            dataGridView1.Rows.Clear(); // Limpa as linhas atuais antes de carregar os dados
+
+            try
+            {
+                // Ler o conteúdo do arquivo
+                string json = File.ReadAllText(path());
+
+                // Desserializar o JSON para uma lista de objetos Pessoa
+                List<Pessoas> pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(json);
+
+                // Adicionar os dados ao DataGridView
+                foreach (var pessoa in pessoas)
+                {
+                    dataGridView1.Rows.Add(pessoa.nome, pessoa.idade, pessoa.endereco, pessoa.cargo, pessoa.aprovado); ;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar os dados: " + ex.Message);
+            }
         }
     }
 }

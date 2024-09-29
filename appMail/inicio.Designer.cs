@@ -44,7 +44,7 @@
             dataGridView1.Location = new Point(12, 152);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(776, 245);
+            dataGridView1.Size = new Size(776, 254);
             dataGridView1.TabIndex = 0;
             // 
             // btn
@@ -68,7 +68,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(659, 403);
+            btnSave.Location = new Point(278, 412);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(129, 35);
             btnSave.TabIndex = 3;
@@ -78,7 +78,7 @@
             // 
             // btnExclude
             // 
-            btnExclude.Location = new Point(325, 403);
+            btnExclude.Location = new Point(413, 412);
             btnExclude.Name = "btnExclude";
             btnExclude.Size = new Size(129, 35);
             btnExclude.TabIndex = 5;
