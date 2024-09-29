@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj": {}
+    "C:\\Users\\Maykinho\\Desktop\\teste\\Csharp_GeradorDePDF\\appMail\\appMail.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj": {
+    "C:\\Users\\Maykinho\\Desktop\\teste\\Csharp_GeradorDePDF\\appMail\\appMail.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
+        "projectUniqueName": "C:\\Users\\Maykinho\\Desktop\\teste\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
         "projectName": "appMail",
-        "projectPath": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
+        "projectPath": "C:\\Users\\Maykinho\\Desktop\\teste\\Csharp_GeradorDePDF\\appMail\\appMail.csproj",
         "packagesPath": "C:\\Users\\Maykinho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maykinho\\Desktop\\to git\\Csharp_GeradorDePDF\\appMail\\obj\\",
+        "outputPath": "C:\\Users\\Maykinho\\Desktop\\teste\\Csharp_GeradorDePDF\\appMail\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Maykinho\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"

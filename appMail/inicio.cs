@@ -6,7 +6,7 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.Kernel.Colors;
 using appMail.forms;
-using iText.Commons.Utils;
+using DotNetEnv;
 
 namespace appMail
 {
@@ -28,6 +28,7 @@ namespace appMail
             btnSave.Text = "Salvar";
             btnExclude.Text = "Excluir";
             btnAdd.Text = "adicionar";
+            btnEmail.Text = "Enviar Email";
 
 
             //Configuration buttons Colors
@@ -82,6 +83,16 @@ namespace appMail
             return filepath.ToString();
         }
 
+        private void startEnvoriment()
+        {
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.Parent.FullName;
+            string relativePath = Path.Combine(projectDirectory, @"core\.env");
+            
+            // Carrega o arquivo .env usando o caminho especificado
+            Env.Load(relativePath);
+        }
+
 
         private void CarregarColunasDataGridView()
         {
@@ -109,7 +120,6 @@ namespace appMail
             dataGridView1.Columns["Cargo"].ReadOnly = false;     // Coluna Cargo readonly
             dataGridView1.Columns["Aprovado"].ReadOnly = false; // Coluna Aprovado editável
         }
-
 
         private void inicio_Load(object sender, EventArgs e)
         {
@@ -204,6 +214,7 @@ namespace appMail
                 MessageBox.Show(error.Message);
             }
         }
+        
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -328,6 +339,53 @@ namespace appMail
             {
                 MessageBox.Show("Erro ao carregar os dados: " + ex.Message);
             }
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            startEnvoriment();
+            
+            var email = Environment.GetEnvironmentVariable("EMAIL_USER");
+            var password = Environment.GetEnvironmentVariable("PASSWORD_USER");
+            var smtp = Environment.GetEnvironmentVariable("SMTP_USER");
+
+            Email mail = new Email(smtp, email, password);
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.Visible = true;
+
+
+            try
+            {
+                // Executa o envio de e-mail em uma tarefa separada
+                await Task.Run(() =>
+                {
+                    // Código de envio de e-mail
+                    mail.sendEmail(new List<string> { "jacileny.lima.1@gmail.com" },
+                        subject: "PROCESSO SELETIVO",
+                        body: "Segue em anexo o edital dos candidatos aprovados no processo seletivo",
+                        attachments: new List<string> { pdfPath() });
+                });
+
+                // Quando o e-mail for enviado com sucesso
+                MessageBox.Show("E-mail enviado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                // Se houver erro
+                MessageBox.Show($"Erro ao enviar o e-mail: {ex.Message}");
+            }
+            finally
+            {
+                // Ao final, independente de sucesso ou falha
+                progressBar.Visible = false;  // Esconde o ProgressBar
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+       
+  
         }
     }
 }

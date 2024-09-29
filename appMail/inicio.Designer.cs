@@ -34,6 +34,9 @@
             btnSave = new Button();
             btnExclude = new Button();
             btnAdd = new Button();
+            btnEmail = new Button();
+            progressBar = new ProgressBar();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -96,12 +99,42 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
+            // btnEmail
+            // 
+            btnEmail.Location = new Point(12, 12);
+            btnEmail.Name = "btnEmail";
+            btnEmail.Size = new Size(102, 23);
+            btnEmail.TabIndex = 7;
+            btnEmail.Text = "button1";
+            btnEmail.UseVisualStyleBackColor = true;
+            btnEmail.Click += button1_Click;
+            // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(120, 12);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(176, 23);
+            progressBar.TabIndex = 8;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(328, 82);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 9;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
             // inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(810, 459);
+            Controls.Add(button1);
+            Controls.Add(progressBar);
+            Controls.Add(btnEmail);
             Controls.Add(btnAdd);
             Controls.Add(btnExclude);
             Controls.Add(btnSave);
@@ -125,5 +158,8 @@
         private Button btnSave;
         private Button btnExclude;
         private Button btnAdd;
+        private Button btnEmail;
+        private ProgressBar progressBar;
+        private Button button1;
     }
 }
