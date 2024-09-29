@@ -23,6 +23,7 @@ EMAIL=seu-email@dominio.com
 PASSWORD=sua-senha
 SMTP=smtp.dominio.com
 PORT=587
+```
 
 **⚠️ Atenção: Mantenha este arquivo seguro, pois ele contém informações confidenciais.**
 
@@ -38,7 +39,7 @@ Clone o repositório em sua máquina utilizando o comando abaixo:
 
 ```bash
 git clone https://github.com/seu-usuario/AppMail.git
-
+```
 
 ## 📋 Pré-requisitos
 Antes de começar, certifique-se de ter os seguintes itens instalados em sua máquina:
