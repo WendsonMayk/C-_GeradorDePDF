@@ -80,3 +80,4 @@ C:\Users\Maykinho\Desktop\to git\Csharp_GeradorDePDF\appMail\obj\Debug\net6.0-wi
 C:\Users\Maykinho\Desktop\to git\Csharp_GeradorDePDF\appMail\obj\Debug\net6.0-windows\appMail.pdb
 C:\Users\Maykinho\Desktop\to git\Csharp_GeradorDePDF\appMail\obj\Debug\net6.0-windows\appMail.genruntimeconfig.cache
 C:\Users\Maykinho\Desktop\to git\Csharp_GeradorDePDF\appMail\obj\Debug\net6.0-windows\ref\appMail.dll
+C:\Users\Maykinho\Desktop\to git\Csharp_GeradorDePDF\appMail\obj\Debug\net6.0-windows\appMail.forms.addPessoas.resources

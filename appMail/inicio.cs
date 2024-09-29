@@ -5,6 +5,7 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.Kernel.Colors;
+using appMail.forms;
 
 namespace appMail
 {
@@ -14,6 +15,8 @@ namespace appMail
         {
             InitializeComponent();
             CarregarColunasDataGridView();
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
 
             //Configuration
             label1.Text = "Email Sender v1.0";
@@ -221,6 +224,49 @@ namespace appMail
             }
         }
 
-   
+        private void btnExclude_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Verificar se alguma linha está selecionada no DataGridView
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    // Obter a linha selecionada
+                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                    string nomeParaExcluir = selectedRow.Cells["Nome"].Value.ToString();
+
+                    if (File.Exists(path()))
+                    {
+                        string json = File.ReadAllText(path());
+                        List<Pessoas> pessoas = JsonConvert.DeserializeObject<List<Pessoas>>(json);
+                        pessoas = pessoas.Where(p => p.nome != nomeParaExcluir).ToList();
+                        string jsonAtualizado = JsonConvert.SerializeObject(pessoas, Formatting.Indented);
+                        File.WriteAllText(path(), jsonAtualizado);
+                        dataGridView1.Rows.Remove(selectedRow);
+                        MessageBox.Show("Pessoa removida com sucesso.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Arquivo JSON não encontrado.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione uma linha para excluir.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao excluir a pessoa: " + ex.Message);
+            }
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            addPessoas addPessoas = new addPessoas();
+
+            addPessoas.ShowDialog();
+        }
     }
 }

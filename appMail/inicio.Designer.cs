@@ -32,6 +32,8 @@
             btn = new Button();
             label1 = new Label();
             btnSave = new Button();
+            btnExclude = new Button();
+            btnAdd = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -39,7 +41,7 @@
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 114);
+            dataGridView1.Location = new Point(12, 152);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(776, 245);
@@ -47,7 +49,7 @@
             // 
             // btn
             // 
-            btn.Location = new Point(713, 85);
+            btn.Location = new Point(713, 123);
             btn.Name = "btn";
             btn.Size = new Size(75, 23);
             btn.TabIndex = 1;
@@ -58,7 +60,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 96);
+            label1.Location = new Point(12, 134);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 2;
@@ -74,16 +76,40 @@
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
+            // btnExclude
+            // 
+            btnExclude.Location = new Point(325, 403);
+            btnExclude.Name = "btnExclude";
+            btnExclude.Size = new Size(129, 35);
+            btnExclude.TabIndex = 5;
+            btnExclude.Text = "button2";
+            btnExclude.UseVisualStyleBackColor = true;
+            btnExclude.Click += btnExclude_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(632, 123);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(75, 23);
+            btnAdd.TabIndex = 6;
+            btnAdd.Text = "button1";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
             // inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ClientSize = new Size(810, 459);
+            Controls.Add(btnAdd);
+            Controls.Add(btnExclude);
             Controls.Add(btnSave);
             Controls.Add(label1);
             Controls.Add(btn);
             Controls.Add(dataGridView1);
             Name = "inicio";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "inicio";
             Load += inicio_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -97,5 +123,7 @@
         private Button btn;
         private Label label1;
         private Button btnSave;
+        private Button btnExclude;
+        private Button btnAdd;
     }
 }

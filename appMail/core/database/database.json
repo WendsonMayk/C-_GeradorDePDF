@@ -68,19 +68,5 @@
     "endereco": "Rua Vitcria, 555, Floriancpolis, SC",
     "cargo": "Arquiteto",
     "aprovado": true
-  },
-  {
-    "nome": "Wendson Mayk",
-    "idade": 18,
-    "endereco": "Rua rio bonito",
-    "cargo": "Programador",
-    "aprovado": true
-  },
-  {
-    "nome": "Nena",
-    "idade": 44,
-    "endereco": "Rua rio bonito",
-    "cargo": "Viking",
-    "aprovado": true
   }
 ]
