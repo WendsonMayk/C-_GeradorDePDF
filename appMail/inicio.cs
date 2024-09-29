@@ -149,7 +149,7 @@ namespace appMail
             <h1>Wendson Magalhães</h1>
         </div>
         <div class='content'>
-            <p>Olá candidato! Ansioso para o resultado da seleção?,</p>
+            <p>Olá candidato! Ansioso para o resultado da seleção?</p>
             <p>Informamos que o processo seletivo chegou ao fim. Em anexo, você encontrará o edital com os candidatos aprovados.</p>
             <p>Se você tiver alguma dúvida, entre em contato com o suporte.</p>
         </div>
@@ -429,7 +429,7 @@ namespace appMail
                 await Task.Run(() =>
                 {
                     // Código de envio de e-mail
-                    mail.sendEmail(new List<string> { "jacileny.lima1@gmail.com" }, //Adicione o email ou os e-mails para quem vc quer enviar
+                    mail.sendEmail(new List<string> { "wendson444@gmail.com" }, //Adicione o email ou os e-mails para quem vc quer enviar
                         subject: "PROCESSO SELETIVO",
                         body: htmlBody(),
                         attachments: new List<string> { pdfPath() });
