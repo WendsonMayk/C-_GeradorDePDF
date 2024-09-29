@@ -1,4 +1,4 @@
-﻿# 📧 AppMail
+﻿# 📧 AppMail/Generator
 
 **AppMail** é uma aplicação desenvolvida em **C#** para facilitar o envio de e-mails de forma simples e eficiente. Ele utiliza bibliotecas modernas e um arquivo de configuração `.env` para armazenar informações de autenticação do usuário, como e-mail, senha e configurações de SMTP.
 
@@ -38,7 +38,7 @@ Siga as etapas abaixo para clonar o repositório, instalar as dependências e co
 Clone o repositório em sua máquina utilizando o comando abaixo:
 
 ```bash
-git clone https://github.com/seu-usuario/AppMail.git
+git clone https://github.com/WendsonMayk/Csharp_GeradorDePDF.git
 ```
 
 ## 📋 Pré-requisitos
